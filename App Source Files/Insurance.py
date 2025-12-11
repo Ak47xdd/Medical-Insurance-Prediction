@@ -4,8 +4,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 
+
 df = pd.read_csv(r"C:\Portfoilo Projects\Medical-Insurance-Prediction\Data\insurance.csv")
-df
 
 df_1 = df.drop(columns= 'sex', axis = 1)
 df_1 = df.drop(columns= 'region', axis = 1)

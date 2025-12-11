@@ -1,8 +1,8 @@
-('C:\\Portfoilo '
- 'Projects\\Medical-Insurance-Prediction\\App_Source_Files\\build\\MedPred\\PYZ-00.pyz',
+('C:\\Portfoilo Projects\\Medical-Insurance-Prediction\\App Source '
+ 'Files\\build\\MedPred\\PYZ-00.pyz',
  [('Insurance',
-   'C:\\Portfoilo '
-   'Projects\\Medical-Insurance-Prediction\\App_Source_Files\\Insurance.py',
+   'C:\\Portfoilo Projects\\Medical-Insurance-Prediction\\App Source '
+   'Files\\Insurance.py',
    'PYMODULE'),
   ('__future__',
    'C:\\Program Files\\Python314\\Lib\\__future__.py',
