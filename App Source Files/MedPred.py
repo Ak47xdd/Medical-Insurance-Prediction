@@ -7,6 +7,8 @@ root = tk.Tk()
 
 root.title("Medical Insurance Predictor")
 
+root.geometry("573x152")
+
 root.iconbitmap(r'C:\Portfoilo Projects\Medical-Insurance-Prediction\App Source Files\MedPred.ico')
 
 label_sub = Label(root, text='Predict Your Medical Insurance')
@@ -29,6 +31,17 @@ e2 = Entry(root, textvariable=str_var2)
 e2.grid(row=3,column=1)
 
 error_label = None
+
+# def on_resize(event):
+    # """
+    # Callback function to get and print the new width and height of the window.
+    # use only if you want window data!
+    # """
+#     width = event.width
+#     height = event.height                                                         # current = Width=573, Height=152
+#     print(f"Window resized to: Width={width}, Height={height}")
+
+# root.bind("<Configure>", on_resize)
 
 def on_click() :
     global error_label
