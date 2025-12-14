@@ -7,8 +7,6 @@ root = tk.Tk()
 
 root.title("Medical Insurance Predictor")
 
-root.geometry("573x152")
-
 root.iconbitmap(r'C:\Portfoilo Projects\Medical-Insurance-Prediction\App Source Files\MedPred.ico')
 
 label_sub = Label(root, text='Predict Your Medical Insurance')
