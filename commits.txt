@@ -5,3 +5,4 @@ second commit (25-11-25) -          commit 8367c9868719a484001bbada242843adc7169
 third commit (25-11-25)  -          commit e46562a52c2f7078a979276537f23b722f8a153c (added tracker)
 fourth commit (25-11-25) -          commit 4621dce9b5990213bf5d22ea20b8b626df14b56c (added logs)
 fifth commit (4-12-25)   -          commit 0318865970c43ef90e5d6c3f57d88f21e0b791e7 (modified main.py)
+sixth commit             -          commit 874f458e0733f1ec66ac1fdc0017a8ad00d29874 (bug fixes and updations)
