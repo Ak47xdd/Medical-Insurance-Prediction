@@ -13,6 +13,7 @@
 <h4 align="center">* Numpy</h4>
 <h4 align="center">* Tkinter</h4>
 <h4 align="center">* Pyinstaller</h4>
+<h4 align="center">* Inno Setupr</h4>
 
 - 🌱 I’m currently learning **Deep Learning and Neural Networks**
 
