@@ -1,0 +1,6 @@
+#ENV
+.env
+
+#files
+.vscode
+.venv
