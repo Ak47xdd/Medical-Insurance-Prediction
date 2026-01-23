@@ -1,7 +1,6 @@
 import pandas as pd 
 import numpy as np
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 
 
@@ -35,8 +34,6 @@ smoker_model.coef_
 y_pred = smoker_model.predict(X_train)
 
 test_pred = smoker_model.predict(X_test)
-
-mean_squared_error(y_test, test_pred)
 
 class Predictor :
 
