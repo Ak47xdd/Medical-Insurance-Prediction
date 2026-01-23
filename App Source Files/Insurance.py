@@ -6,9 +6,9 @@ from sklearn.model_selection import train_test_split
 
 df = pd.read_csv(r"C:\Portfolio-Projects\Medical-Insurance-Prediction\Data\insurance.csv")
 
-df_1 = df.drop(columns= 'sex', axis = 1)
-df_1 = df.drop(columns= 'region', axis = 1)
-df_1 = df.drop(columns= 'smoker', axis = 1)
+df_1 = df.drop(columns= 'sex')
+df_1 = df.drop(columns= 'region')
+df_1 = df.drop(columns= 'smoker')
 
 df_1['log_charges'] = np.log2(df_1['charges'])
 df['log_charges'] = np.log2(df['charges'])
