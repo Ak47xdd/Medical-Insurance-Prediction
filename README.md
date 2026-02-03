@@ -1,4 +1,4 @@
-<h1 align="center">Medical Insurance Prediction Model v2.0</h1>
+<h1 align="center">Medical Insurance Prediction Model and App (MedPred.AI) v2.0</h1>
 <h3 align="center">This model predicts individuals Insurance Amount (in dollars) with data containing : </h3>
 <h4 align="center"> * Age of the patient </h4>
 <h4 align="center">* BMI</h4>
