@@ -7,7 +7,7 @@ root = tk.Tk()
 
 root.title("Medical Insurance Predictor")
 
-root.iconbitmap(r'C:\Portfolio-Projects\Medical-Insurance-Prediction\App Source Files\MedPred.ico')
+root.iconbitmap(r"C:\Portfolio-Projects\Medical-Insurance-Prediction\App Source Files\MedPred.ico")
 
 label_sub = Label(root, text='Predict Your Medical Insurance')
 label_fields = Label(root, text= 'Enter the given fields')
