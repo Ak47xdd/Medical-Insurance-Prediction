@@ -49,23 +49,31 @@ def on_click() :
     try:
         if not e1.get().strip() or not e2.get().strip():
             raise ValueError("Please enter values for both age and BMI.")
+        
         age = int(e1.get())
         bmi = float(e2.get())
+        
         if age <= 0 or bmi <= 0:
             raise ValueError("Age and BMI must be positive numbers.")
+        
         clicked = Label(root, text="Predicting...")
         clicked.grid(row=5, column=3)
         start_time = time.time()
+        
         pred = ins.Predictor(age=age, bmi=bmi)
         end_time = time.time()
         elapsed_time = end_time - start_time
+        
         clicked.destroy()
+        
         label_output = Label(root, text=f'Insurance : ${pred}')
         label_output.grid(row=4,column=1)
         label_time = Label(root, text=f'Time taken: {elapsed_time:.2f} seconds')
         label_time.grid(row=6, column=3)
+        
         e1.delete(0, END)
         e2.delete(0, END)
+        
     except Exception as e:
         error_label = Label(root, text=f"Error: {str(e)}")
         error_label.grid(row=7, column=1)
