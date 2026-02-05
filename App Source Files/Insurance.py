@@ -40,10 +40,8 @@ class Predictor :
     def __init__(self, age, bmi):
         self.age = age
         self.bmi = bmi
-        model_test = pd.DataFrame([self.age, self.bmi]).transpose()
-        model_test.columns = ['age', 'bmi']
-        self.new_pred = smoker_model.predict(model_test)
-        self.new_pred = (np.exp2(self.new_pred))
+        model_test = pd.DataFrame([[self.age, self.bmi]], columns=['age', 'bmi'])
+        self.new_pred = float(np.exp2(smoker_model.predict(model_test)[0]))
 
     def __str__(self):
-        return f"{float(self.new_pred.round(3)):,.2f}"
+        return f"{self.new_pred:,.2f}"
