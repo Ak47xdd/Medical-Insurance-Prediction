@@ -58,7 +58,7 @@ def on_click() :
         if age > 120 or bmi > 210:
             raise ValueError("The given Age or BMI is not humanly possible!.")
         
-        if bmi == 0:
+        elif bmi == 0:
             raise ValueError("No one in this world has BMI 0.")
         
         if age < 0 or bmi < 0:
