@@ -20,6 +20,7 @@ label_age.grid(row=2, column=0)
 label_bmi.grid(row=3, column=0)
 
 str_var1 = tk.StringVar()
+
 str_var2 = tk.StringVar()
 
 e1 = Entry(root, textvariable=str_var1)
@@ -51,9 +52,16 @@ def on_click() :
             raise ValueError("Please enter values for both age and BMI.")
         
         age = int(e1.get())
+        
         bmi = float(e2.get())
         
-        if age <= 0 or bmi <= 0:
+        if age > 120 or bmi > 210:
+            raise ValueError("The given Age or BMI is not humanly possible!.")
+        
+        if bmi == 0:
+            raise ValueError("No one in this world has BMI 0.")
+        
+        if age < 0 or bmi < 0:
             raise ValueError("Age and BMI must be positive numbers.")
         
         clicked = Label(root, text="Predicting...")
