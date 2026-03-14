@@ -104,7 +104,7 @@ Enter age and BMI in the GUI to get predicted charges.
 
 ## Screenshots
 
-![App GUI](C:\Portfolio-Projects\Medical-Insurance-Prediction\Screenshot 2026-01-23 115818.png) <!-- Add screenshot here -->
+![App GUI](./Screenshot 2026-01-23 115818.png)
 
 ## Contributing
 
