@@ -1,31 +1,119 @@
-<h1 align="center">Medical Insurance Prediction Model and App (MedPred.AI) v2.0</h1>
-<h3 align="center">This model predicts individuals Insurance Amount (in dollars) with data containing : </h3>
-<h4 align="center"> * Age of the patient </h4>
-<h4 align="center">* BMI</h4>
+# Medical Insurance Prediction (MedPred)
 
-<h3 align="center">This model is built using </h3>
-<h4 align="center"> * Jupyter Notebook </h4>
-<h4 align="center">* Python</h4>
-<h4 align="center">* Pandas</h4>
-<h4 align="center">* Scikitlearn</h4>
-<h4 align="center">* Seaborn</h4>
-<h4 align="center">* Matplotlib</h4>
-<h4 align="center">* Numpy</h4>
-<h4 align="center">* Tkinter</h4>
-<h4 align="center">* Pyinstaller</h4>
-<h4 align="center">* Inno Setupr</h4>
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3%2B-yellow)](https://scikit-learn.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-- 🌱 I’m currently learning **Deep Learning and Neural Networks**
+## 📖 Table of Contents
 
-- 👨‍💻 All of my projects are available at [https://github.com/Fuhrerx](https://github.com/Fuhrerx)
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Model Details](#model-details)
+- [Dataset](#dataset)
+- [Build & Deployment](#build--deployment)
+- [Screenshots](#screenshots)
+- [Contributing](#contributing)
+- [License](#license)
 
-- 📫 How to reach me **akshaysureshbabu200@gmail.com**
+## Overview
 
-<h3 align="left">Connect with me:</h3>
-<p align="left">
-<a href="https://linkedin.com/in/akshay babu" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="akshay babu" height="30" width="40" /></a>
-<a href="https://kaggle.com/akshay babu" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/kaggle.svg" alt="akshay babu" height="30" width="40" /></a>
-</p>
+MedPred is a machine learning application that predicts medical insurance costs based on patient age and BMI. It uses a linear regression model trained specifically on smoker data for accurate predictions. The project includes a Jupyter notebook for model development and a standalone Tkinter GUI app, packaged as a Windows executable.
 
-<h3 align="left">Languages and Tools:</h3>
-<p align="left"> <a href="https://pandas.pydata.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/2ae2a900d2f041da66e950e4d48052658d850630/icons/pandas/pandas-original.svg" alt="pandas" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devi
+## Features
+
+- Predict insurance charges using age and BMI
+- Trained on real insurance dataset
+- Interactive GUI application
+- Pre-built Windows executable (`App/MedPred.exe`)
+- Model evaluation with MSE, R² scores
+- Installer via Inno Setup (`App/MedPred setup.exe`)
+
+## Tech Stack
+
+| Category        | Technologies                   |
+| --------------- | ------------------------------ |
+| Language        | Python 3.8+                    |
+| ML Framework    | scikit-learn 1.3+              |
+| Data Processing | pandas 2.0+, NumPy 1.24+       |
+| Visualization   | Matplotlib 3.7+, Seaborn 0.12+ |
+| GUI             | Tkinter (standard lib)         |
+| Packaging       | PyInstaller                    |
+| Installer       | Inno Setup                     |
+
+## Installation
+
+1. Clone the repo:
+   ```
+   git clone <repo-url>
+   cd Medical-Insurance-Prediction
+   ```
+2. Create virtual environment:
+   ```
+   python -m venv venv
+   venv\\Scripts\\activate  # Windows
+   ```
+3. Install dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
+
+## Usage
+
+### Run the App
+
+```bash
+python "App Source Files/MedPred.py"
+```
+
+Or use pre-built executable: `App/MedPred.exe`
+
+### Train/Explore Model
+
+Open `Model/Insurance.ipynb` in Jupyter:
+
+```bash
+jupyter notebook Model/Insurance.ipynb
+```
+
+Enter age and BMI in the GUI to get predicted charges.
+
+## Model Details
+
+- **Target**: log-transformed insurance `charges` (then exp2 for dollars)
+- **Features**: `age`, `bmi` (smokers only model for better accuracy)
+- **Algorithm**: LinearRegression (with hyperparameter tuning via GridSearchCV on Ridge)
+- **Performance**: Low MSE on train/test, R² ~0.8+ (see notebook)
+- Prediction class in `App Source Files/Insurance.py`
+
+## Dataset
+
+- `Data/insurance.csv`: Kaggle dataset with age, sex, bmi, children, smoker, region, charges.
+- Preprocessed: Dropped categorical, log transform charges, smoker filter.
+
+## Build & Deployment
+
+1. Build EXE with PyInstaller:
+   ```
+   pip install pyinstaller
+   pyinstaller App Source Files/MedPred.spec
+   ```
+2. Create installer with Inno Setup using `App Source Files/script_inno.iss`.
+
+## Screenshots
+
+![App GUI](C:\Portfolio-Projects\Medical-Insurance-Prediction\Screenshot 2026-01-23 115818.png) <!-- Add screenshot here -->
+
+## Contributing
+
+1. Fork the repo
+2. Create branch: `git checkout -b feature-branch`
+3. Commit: `git commit -m 'Add feature'`
+4. Push: `git push origin feature-branch`
+5. Open PR
+
+## License
+
+MIT License - see [LICENSE](LICENSE) for details.
