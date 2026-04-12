@@ -3,6 +3,8 @@ numpy>=1.24.0
 scikit-learn>=1.3.0
 matplotlib>=3.7.0
 seaborn>=0.12.0
+fastapi>=0.135.3
+fastmcp>=3.2.3
 # tkinter is standard library
 # PyInstaller: pip install pyinstaller
 # Inno Setup: download from jrsoftware.org
