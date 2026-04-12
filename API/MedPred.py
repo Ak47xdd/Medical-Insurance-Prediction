@@ -3,6 +3,10 @@ from tkinter import *
 import Insurance as ins
 import time
 
+age_data = []
+bmi_data = []
+ins_data = []
+
 root = tk.Tk()
 
 root.title("Medical Insurance Predictor")
@@ -93,6 +97,11 @@ def on_click() :
         label_output.grid(row=4,column=1)
         label_time = Label(root, text=f'Time taken: {elapsed_time:.2f} seconds')
         label_time.grid(row=6, column=3)
+        
+        global age_data, bmi_data, ins_data
+        age_data.append(age)
+        bmi_data.append(bmi)
+        ins_data.append(predict().new_pred)
         
         # e1_age.delete(0, END)
         # e2_bmi.delete(0, END)
