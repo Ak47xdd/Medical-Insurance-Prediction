@@ -23,10 +23,12 @@ str_var1 = tk.StringVar()
 
 str_var2 = tk.StringVar()
 
+global e1_age 
 e1_age = Entry(root, textvariable=str_var1)
 e1_age.grid(row=2,column=1)
 
-e2_bmi = Entry(root, textvariable=str_var2)
+global e2_bmi 
+e2_bmi= Entry(root, textvariable=str_var2)
 e2_bmi.grid(row=3,column=1)
 
 error_label = None
@@ -81,13 +83,13 @@ def on_click() :
         clicked.grid(row=5, column=3)
         start_time = time.time()
         
-        pred = predict()
+        predict()
         end_time = time.time()
         elapsed_time = end_time - start_time
         
         clicked.destroy()
         
-        label_output = Label(root, text=f'Insurance : ${pred}')
+        label_output = Label(root, text=f'Insurance : ${predict()}')
         label_output.grid(row=4,column=1)
         label_time = Label(root, text=f'Time taken: {elapsed_time:.2f} seconds')
         label_time.grid(row=6, column=3)
