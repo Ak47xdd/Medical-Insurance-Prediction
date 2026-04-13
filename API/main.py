@@ -1,35 +1,35 @@
 from fastapi import FastAPI
 from fastmcp import FastMCP
 import pandas as pd
+from pydantic import BaseModel
+import os
 
 import MedPred as med
 
 app = FastAPI(title="Database Management API - MedPred.AI")
 
-# def get_data():
-#     age = med.age_data
-#     bmi = med.bmi_data
-#     ins = med.ins_data
+CSV_PATH = "new_data.csv"
 
-#     return age, bmi, ins
+class PatientEntry(BaseModel) :
+    age : int
+    bmi : float
+    ins : float
 
 @app.post("/data")
-def get_val():
-    age, bmi, ins = med.get_data()
-
-    pred_val = ins
-    pred_val = [round(x, 4) for x in pred_val]
-
-    # print(age)
-    # print(bmi)
-    # print(pred_val)
-
-    rows = []
-    for a, b, c in zip(age, bmi, pred_val):
-        rows.append({'age': a, 'bmi': b, 'charges': c})
+def get_val(entry : PatientEntry):
+    new_row = pd.DataFrame([entry.model_dump()])
+    
+    if os.path.exists(CSV_PATH) :
+        new_row.to_csv(CSV_PATH, mode="a", header=False, index=False)
+    else :
+        new_row.to_csv(CSV_PATH, mode="w", header=True, index=False)
         
-    new_data = pd.DataFrame(rows)
-
-    new_data.to_csv("new_data.csv", mode='a', index=False, header=False)
-
-# get_val()
+    return {"status" : "success", "message" : "Entry Added."}
+    
+    
+@app.get("/entries")
+def entries() :
+    if not os.path.exists(CSV_PATH) :
+        return {"data" : []}
+    df = pd.read_csv(CSV_PATH)
+    return {"data" : df.to_dict(orient="records")}
