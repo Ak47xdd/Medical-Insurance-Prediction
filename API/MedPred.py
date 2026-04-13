@@ -1,125 +1,137 @@
 import tkinter as tk
 from tkinter import *
 import Insurance as ins
+import requests
 import time
 
 age_data = []
 bmi_data = []
 ins_data = []
-if __name__ == "__main__" :
-    root = tk.Tk()
 
-    root.title("Medical Insurance Predictor")
+root = tk.Tk()
 
-    root.iconbitmap(r"C:\Portfolio-Projects\Medical-Insurance-Prediction\App Source Files\MedPred.ico")
+root.title("Medical Insurance Predictor")
 
-    label_sub = Label(root, text='Predict Your Medical Insurance')
-    label_fields = Label(root, text= 'Enter the given fields')
-    label_age = Label(root, text='Enter the age of the patient :      $')
-    label_bmi = Label(root, text='Enter the BMI of the patient :      $')
+root.iconbitmap(r"C:\Portfolio-Projects\Medical-Insurance-Prediction\App Source Files\MedPred.ico")
 
-    label_sub.grid(row=0, column=1)
-    label_fields.grid(row=1, column=1)
-    label_age.grid(row=2, column=0)
-    label_bmi.grid(row=3, column=0)
+label_sub = Label(root, text='Predict Your Medical Insurance')
+label_fields = Label(root, text= 'Enter the given fields')
+label_age = Label(root, text='Enter the age of the patient :      $')
+label_bmi = Label(root, text='Enter the BMI of the patient :      $')
 
-    str_var1 = tk.StringVar()
+label_sub.grid(row=0, column=1)
+label_fields.grid(row=1, column=1)
+label_age.grid(row=2, column=0)
+label_bmi.grid(row=3, column=0)
 
-    str_var2 = tk.StringVar()
+str_var1 = tk.StringVar()
 
-    global e1_age 
-    e1_age = Entry(root, textvariable=str_var1)
-    e1_age.grid(row=2,column=1)
+str_var2 = tk.StringVar()
 
-    global e2_bmi 
-    e2_bmi= Entry(root, textvariable=str_var2)
-    e2_bmi.grid(row=3,column=1)
+global e1_age 
+e1_age = Entry(root, textvariable=str_var1)
+e1_age.grid(row=2,column=1)
 
-    error_label = None
+global e2_bmi 
+e2_bmi= Entry(root, textvariable=str_var2)
+e2_bmi.grid(row=3,column=1)
 
-    # def on_resize(event):
-        # """
-        # Callback function to get and print the new width and height of the window.
-        # use only if you want window data!
-        # """
-    #     width = event.width
-    #     height = event.height                                                         # current = Width=573, Height=152
-    #     print(f"Window resized to: Width={width}, Height={height}")
+error_label = None
 
-    # root.bind("<Configure>", on_resize)
+# def on_resize(event):
+    # """
+    # Callback function to get and print the new width and height of the window.
+    # use only if you want window data!
+    # """
+#     width = event.width
+#     height = event.height                                                         # current = Width=573, Height=152
+#     print(f"Window resized to: Width={width}, Height={height}")
 
-    def get_age_bmi() :
-        global age 
-        age = int(e1_age.get())
+# root.bind("<Configure>", on_resize)
+
+def get_age_bmi() :
+    global age 
+    age = int(e1_age.get())
+    
+    global bmi 
+    bmi = float(e2_bmi.get())
+    
+    if age > 120 or bmi > 210:
+        raise ValueError("The given Age or BMI is not humanly possible!.")
+    
+    elif bmi == 0:
+        raise ValueError("No one in this world has BMI 0.")
+    
+    if age < 0 or bmi < 0:
+        raise ValueError("Age and BMI must be positive numbers.")
+    
+    return age, bmi
+    
+def predict() :
+    global pred 
+    pred = ins.Predictor(age=age, bmi=bmi)
+    
+    return pred
+
+def on_click() :
+    global error_label
+    if error_label:
+        error_label.destroy()
+        error_label = None
+    try:
+        if not e1_age.get().strip() or not e2_bmi.get().strip():
+            raise ValueError("Please enter values for both age and BMI.")
         
-        global bmi 
-        bmi = float(e2_bmi.get())
+        get_age_bmi()
         
-        if age > 120 or bmi > 210:
-            raise ValueError("The given Age or BMI is not humanly possible!.")
+        clicked = Label(root, text="Predicting...")
+        clicked.grid(row=5, column=3)
+        start_time = time.time()
         
-        elif bmi == 0:
-            raise ValueError("No one in this world has BMI 0.")
+        predict()
+        end_time = time.time()
+        elapsed_time = end_time - start_time
         
-        if age < 0 or bmi < 0:
-            raise ValueError("Age and BMI must be positive numbers.")
+        logger(age=age, bmi=bmi, ins=predict())
         
-        return age, bmi
+        clicked.destroy()
         
-    def predict() :
-        global pred 
-        pred = ins.Predictor(age=age, bmi=bmi)
+        label_output = Label(root, text=f'Insurance : ${predict()}')
+        label_output.grid(row=4,column=1)
+        label_time = Label(root, text=f'Time taken: {elapsed_time:.2f} seconds')
+        label_time.grid(row=6, column=3)
         
-        return pred
-
-    def on_click() :
-        global error_label
-        if error_label:
-            error_label.destroy()
-            error_label = None
-        try:
-            if not e1_age.get().strip() or not e2_bmi.get().strip():
-                raise ValueError("Please enter values for both age and BMI.")
-            
-            get_age_bmi()
-            
-            clicked = Label(root, text="Predicting...")
-            clicked.grid(row=5, column=3)
-            start_time = time.time()
-            
-            predict()
-            end_time = time.time()
-            elapsed_time = end_time - start_time
-            
-            clicked.destroy()
-            
-            label_output = Label(root, text=f'Insurance : ${predict()}')
-            label_output.grid(row=4,column=1)
-            label_time = Label(root, text=f'Time taken: {elapsed_time:.2f} seconds')
-            label_time.grid(row=6, column=3)
-            
-            global age_data, bmi_data, ins_data
-            age_data.append(age)
-            bmi_data.append(bmi)
-            ins_data.append(predict().new_pred)
-            
-            # e1_age.delete(0, END)
-            # e2_bmi.delete(0, END)
-            
-        except Exception as e:
-            error_label = Label(root, text=f"Error: {str(e)}")
-            error_label.grid(row=7, column=1)
+        global age_data, bmi_data, ins_data
+        age_data.append(age)
+        bmi_data.append(bmi)
+        ins_data.append(predict().new_pred)
+        
+        # e1_age.delete(0, END)
+        # e2_bmi.delete(0, END)
+        
+    except Exception as e:
+        error_label = Label(root, text=f"Error: {str(e)}")
+        error_label.grid(row=7, column=1)
 
 
-    btn = Button(root, text= "Predict", command=on_click)
+btn = Button(root, text= "Predict", command=on_click)
 
 
-    btn.grid(row=4, column=3)  
-    root.mainloop()
+btn.grid(row=4, column=3)  
+root.mainloop()
 
-def get_data():
-    age = age_data
-    bmi = bmi_data
-    ins = ins_data
-
-    return age, bmi, ins
+def logger(age, bmi, ins) :
+    payload = {
+        "age" : age,
+        "bmi" : bmi,
+        "charges" : ins
+    }
+    
+    try :
+        response = requests.post("https://127.0.0.1:8000/data", json=payload)
+        if response.status_code == 200 :
+            print("Data Added!")
+        else :
+            print("Server Error, cannot add the data")
+    except requests.exceptions.ConnectionError :
+        print("Server does not exist!")
