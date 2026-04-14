@@ -4,6 +4,26 @@ import Insurance as ins
 import requests
 import time
 
+def logger(age, bmi, ins) :
+    # print(f"DEBUG - age : {age}, bmi : {bmi}, ins : {ins}, type : {type(ins)}")
+    payload = {
+        "age" : age,
+        "bmi" : bmi,
+        "charges" : ins
+    }
+    
+    # print(f"DEBUG - payload : {payload}")
+    
+    try :
+        response = requests.post("http://127.0.0.1:8000/data", json=payload)
+        # print(f"DEBUG - status : {response.status_code}, response : {response.text}")
+        if response.status_code == 200 :
+            print("Data Added!")
+        else :
+            print("Server Error, cannot add the data")
+    except requests.exceptions.ConnectionError :
+        print("Server does not exist!")
+
 age_data = []
 bmi_data = []
 ins_data = []
@@ -92,7 +112,9 @@ def on_click() :
         end_time = time.time()
         elapsed_time = end_time - start_time
         
-        logger(age=age, bmi=bmi, ins=predict())
+        ins_logged = predict().new_pred
+        
+        logger(age=age, bmi=bmi, ins=round(ins_logged, 4))
         
         clicked.destroy()
         
@@ -116,22 +138,5 @@ def on_click() :
 
 btn = Button(root, text= "Predict", command=on_click)
 
-
 btn.grid(row=4, column=3)  
 root.mainloop()
-
-def logger(age, bmi, ins) :
-    payload = {
-        "age" : age,
-        "bmi" : bmi,
-        "charges" : ins
-    }
-    
-    try :
-        response = requests.post("https://127.0.0.1:8000/data", json=payload)
-        if response.status_code == 200 :
-            print("Data Added!")
-        else :
-            print("Server Error, cannot add the data")
-    except requests.exceptions.ConnectionError :
-        print("Server does not exist!")
