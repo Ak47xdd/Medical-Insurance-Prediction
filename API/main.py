@@ -4,16 +4,15 @@ import pandas as pd
 from pydantic import BaseModel
 import os
 
-import MedPred as med
-
 app = FastAPI(title="Database Management API - MedPred.AI")
 
-CSV_PATH = "new_data.csv"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CSV_PATH = os.path.join(BASE_DIR, "new_data.csv")
 
 class PatientEntry(BaseModel) :
     age : int
     bmi : float
-    ins : float
+    charges : float
 
 @app.post("/data")
 def get_val(entry : PatientEntry):
