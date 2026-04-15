@@ -4,6 +4,8 @@ import pandas as pd
 from pydantic import BaseModel
 import os
 
+import MedPred as med
+
 app = FastAPI(title="Database Management API - MedPred.AI")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -13,6 +15,10 @@ class PatientEntry(BaseModel) :
     age : int
     bmi : float
     charges : float
+    
+@app.post("/predict")
+def predict(entry : PatientEntry) :
+    pass
 
 @app.post("/data")
 def get_val(entry : PatientEntry):
@@ -25,10 +31,13 @@ def get_val(entry : PatientEntry):
         
     return {"status" : "success", "message" : "Entry Added."}
     
-    
 @app.get("/entries")
 def entries() :
     if not os.path.exists(CSV_PATH) :
         return {"data" : []}
     df = pd.read_csv(CSV_PATH)
     return {"data" : df.to_dict(orient="records")}
+
+@app.get("/")
+def root():
+    return {"message": "Backend running!"}
