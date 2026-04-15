@@ -5,6 +5,7 @@ from pydantic import BaseModel
 import os
 
 import MedPred as med
+import Insurance as ins
 
 app = FastAPI(title="Database Management API - MedPred.AI")
 
@@ -16,9 +17,10 @@ class PatientEntry(BaseModel) :
     bmi : float
     charges : float
     
-@app.post("/predict")
-def predict(entry : PatientEntry) :
-    pass
+@app.post("/predict/")
+async def predict(age : int, bmi : float) :
+    pred_api = ins.Predictor(age=age, bmi=bmi)
+    return pred_api
 
 @app.post("/data")
 def get_val(entry : PatientEntry):
