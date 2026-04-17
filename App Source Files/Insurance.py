@@ -45,3 +45,6 @@ class Predictor :
 
     def __str__(self):
         return f"{self.new_pred:,.2f}"
+
+if(__name__ == "__main__") :
+    Predictor(age=28, bmi=26)
