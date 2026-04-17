@@ -28,12 +28,18 @@ async def predict(age : int, bmi : float) :
         preds
     ]
     
+    head = [
+        "age",
+        "bmi",
+        "charges"
+    ]
+    
     df = pd.DataFrame(data).transpose()
     
     if os.path.exists(CSV_PATH) :
         df.to_csv(CSV_PATH, mode="a", header=False, index=False)
     else :
-        df.to_csv(CSV_PATH, mode="w", header=True, index=False)
+        df.to_csv(CSV_PATH, mode="w", header=head, index=False)
         
     return pred_api
 
