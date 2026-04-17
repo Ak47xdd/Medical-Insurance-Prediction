@@ -19,7 +19,22 @@ class PatientEntry(BaseModel) :
     
 @app.post("/predict/")
 async def predict(age : int, bmi : float) :
-    pred_api = ins.Predictor(age=age, bmi=bmi)
+    pred_api = ins.Predictor(age=age, bmi=bmi).new_pred
+    preds = round(pred_api, 4)
+    
+    data = [
+        age,
+        bmi,
+        preds
+    ]
+    
+    df = pd.DataFrame(data).transpose()
+    
+    if os.path.exists(CSV_PATH) :
+        df.to_csv(CSV_PATH, mode="a", header=False, index=False)
+    else :
+        df.to_csv(CSV_PATH, mode="w", header=True, index=False)
+        
     return pred_api
 
 @app.post("/data")
@@ -42,4 +57,4 @@ def entries() :
 
 @app.get("/")
 def root():
-    return {"message": "Backend running!"}
+    return {"message": "Backend MedPred API running!"}
