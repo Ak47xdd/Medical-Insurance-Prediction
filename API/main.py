@@ -5,7 +5,6 @@ from pydantic import BaseModel
 import os
 
 import Insurance as ins
-import MedPred as med
 
 app = FastAPI(title="Database Management API - MedPred.AI")
 
