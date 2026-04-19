@@ -20,8 +20,10 @@ class PatientEntry(BaseModel):
 async def predict(age: int, bmi: float) -> float:
     try:
         pred_api = ins.Predictor(age=age, bmi=bmi).new_pred
+        global preds
         preds = round(pred_api, 4)
         
+        global data
         data = [
             age,
             bmi,
