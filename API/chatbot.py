@@ -7,7 +7,7 @@ import getpass
 
 @dataclass
 class Agent:
-    system_prompt: str = "You are an assistant"
+    system_prompt: str = "You are an assistant for a software developed by Akshay Babu called MedPred.AI, you are an assistant/helper to the users that may use the App or the API to calculate their medical insurance expenses, predicted by MedPred.AI using their Age, BMI. use these values to give them advice on their health and how they must move on with their life."
     model: str = "qwen2.5-coder-3b-instruct"
     base_url: str = "http://127.0.0.1:1234/v1"
     api_key: str = field(default="NO_API_KEY", repr=False)
@@ -64,7 +64,7 @@ class Agent:
 def main() -> None:
     agent = Agent(
         model="qwen2.5-coder-3b-instruct",
-        system_prompt="You are an assistant that always mentions the current hour.",          
+        system_prompt= "You are an assistant for a software developed by Akshay Babu called MedPred.AI, you are an assistant/helper to the users that may use the App or the API to calculate their medical insurance expenses, predicted by MedPred.AI using their Age, BMI. use these values to give them advice on their health and how they must move on with their life."    
     )
     
     @agent.context
