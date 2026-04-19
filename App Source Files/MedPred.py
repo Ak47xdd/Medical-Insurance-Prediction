@@ -6,8 +6,9 @@ import time
 
 if __name__ == "__main__" :
 
-    def logger(age, bmi, ins) :
+    def logger(age : int, bmi : float, ins : float) :
         # print(f"DEBUG - age : {age}, bmi : {bmi}, ins : {ins}, type : {type(ins)}")
+        global payload
         payload = {
             "age" : age,
             "bmi" : bmi,
@@ -72,7 +73,7 @@ if __name__ == "__main__" :
     # root.bind("<Configure>", on_resize)
 
     def get_age_bmi() :
-        global age 
+        global age
         age = int(e1_age.get())
         
         global bmi 
@@ -83,6 +84,9 @@ if __name__ == "__main__" :
         
         elif bmi == 0:
             raise ValueError("No one in this world has BMI 0.")
+        
+        elif age == 0:
+            raise ValueError("Please add any number greater than 0")
         
         if age < 0 or bmi < 0:
             raise ValueError("Age and BMI must be positive numbers.")
