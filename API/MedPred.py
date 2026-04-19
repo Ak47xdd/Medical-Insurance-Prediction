@@ -8,6 +8,7 @@ if __name__ == "__main__" :
 
     def logger(age : int, bmi : float, ins : float) :
         # print(f"DEBUG - age : {age}, bmi : {bmi}, ins : {ins}, type : {type(ins)}")
+        global payload
         payload = {
             "age" : age,
             "bmi" : bmi,
