@@ -4,7 +4,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 
 
-df = pd.read_csv(r"C:\Portfolio-Projects\Medical-Insurance-Prediction\Data\insurance.csv")
+df = pd.read_csv(r"API\insurance.csv")
 
 df_1 = df.drop(columns= 'sex')
 df_1 = df.drop(columns= 'region')
