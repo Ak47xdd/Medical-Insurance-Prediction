@@ -86,7 +86,7 @@ def main() -> None:
     
     console = Console()
     
-    console.print(f"[blue]Assistant: [/blue]Hello, I'm MedPred.AI. Please enter you age, bmi in the MedPred.AI App and I will predict your insurance in dollars, also feel free to ask questions!")
+    console.print(f"[blue]MedPrd.AI: [/blue]Hello, I'm MedPred.AI. Please enter you age, bmi in the MedPred.AI App and I will predict your insurance in dollars, also feel free to ask questions!")
     
     while True :
         console.print("[green]You:[/green] ", end="")
