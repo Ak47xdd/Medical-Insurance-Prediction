@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: MedPred.AI-API
+    runtime: python
+    plan: free
+    buildCommand: "pip install requirements.txt"
+    startCommand: "cd API && uvicorn main:app --host 0.0.0.0 --port $PORT"
+    enVars:
+      - key: PYTHON_VERSION
+        value: 3.14.3
