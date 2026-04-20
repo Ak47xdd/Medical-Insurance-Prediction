@@ -81,7 +81,7 @@ def main() -> None:
         return (
             f"Age of the user : {df['age'].iloc[-1]}"
             f"BMI of the user : {df['bmi'].iloc[-1]}"
-            f"Predicted Insurance : {df['charges'].iloc[-1]}"
+            f"Predicted Insurance : {df['charges'].iloc[-1]:.4f}"
         )
     
     console = Console()
