@@ -2,6 +2,7 @@ import requests
 from rich.console import Console
 from dataclasses import dataclass, field
 from typing import Any, Callable
+import pandas as pd
 import datetime
 import getpass
 
@@ -73,10 +74,19 @@ def main() -> None:
             f"Current date and time : {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
             f"Current user : {getpass.getuser()}\n"
         )
+        
+    @agent.context
+    def user_info_context() -> str:
+        df = pd.read_csv(r"C:\Portfolio-Projects\Medical-Insurance-Prediction\API\new_data.csv")
+        return (
+            f"Age of the user : {df['age'].iloc[-1]}"
+            f"BMI of the user : {df['bmi'].iloc[-1]}"
+            f"Predicted Insurance : {df['charges'].iloc[-1]}"
+        )
     
     console = Console()
     
-    console.print(f"[blue]Assistant: [/blue]Hello, I'm MedPred.AI. Please enter you age, bmi and I will predict your insurance in dollars, also feel free to ask questions!")
+    console.print(f"[blue]Assistant: [/blue]Hello, I'm MedPred.AI. Please enter you age, bmi in the MedPred.AI App and I will predict your insurance in dollars, also feel free to ask questions!")
     
     while True :
         console.print("[green]You:[/green] ", end="")
