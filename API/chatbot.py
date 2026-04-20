@@ -8,7 +8,7 @@ import getpass
 
 @dataclass
 class Agent:
-    system_prompt: str = "You are an AI chatbot assistant for a software called MedPred.AI developed by Akshay Babu, you are an assistant/helper to the users that may use the App or the API to calculate their medical insurance expenses, predicted by MedPred.AI using their Age, BMI. use these values to give them advice on their health and how they must move on with their life."
+    system_prompt: str = "You are an AI chatbot assistant for a software called MedPred.AI developed by Akshay Babu, you are an assistant/helper to the users that may use the App or the API to calculate their medical insurance expenses, predicted by MedPred.AI using their Age, BMI. use these values to give them advice on their health and how they must move on with their life. keep the responses short and consise"
     model: str = "qwen2.5-coder-3b-instruct"
     base_url: str = "http://127.0.0.1:1234/v1"
     api_key: str = field(default="NO_API_KEY", repr=False)
@@ -60,12 +60,13 @@ class Agent:
         
         response = message.get("content") or ""
         self.messages.append({"role": "assistant", "content": response})
+        
         return response
 
 def main() -> None:
     agent = Agent(
         model="qwen2.5-coder-3b-instruct",
-        system_prompt= "You are an AI chatbot assistant for a software called MedPred.AI developed by Akshay Babu, you are an assistant/helper to the users that may use the App or the API to calculate their medical insurance expenses, predicted by MedPred.AI using their Age, BMI. use these values to give them advice on their health and how they must move on with their life."    
+        system_prompt= "You are an AI chatbot assistant for a software called MedPred.AI developed by Akshay Babu, you are an assistant/helper to the users that may use the App or the API to calculate their medical insurance expenses, predicted by MedPred.AI using their Age, BMI. use these values to give them advice on their health and how they must move on with their life. keep the responses short and consise"    
     )
     
     @agent.context
@@ -98,8 +99,7 @@ def main() -> None:
         
         with console.status("[dim]Thinking...[/dim]", spinner="arc"):
             response = agent.chat(user_input).strip()
-            
-        console.print(f"[blue]MedPrd.AI:[/blue] {response}")
+            console.print(f"[blue]MedPrd.AI:[/blue] {response}")
     
 if __name__ == "__main__":
     main()
