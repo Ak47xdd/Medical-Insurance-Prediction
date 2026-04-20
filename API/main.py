@@ -75,3 +75,4 @@ def entries() -> dict:
 @app.get("/")
 def root():
     return {"message": "Backend MedPred API running!"}
+
