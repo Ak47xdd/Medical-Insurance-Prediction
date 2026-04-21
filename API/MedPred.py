@@ -18,7 +18,13 @@ if __name__ == "__main__" :
         # print(f"DEBUG - payload : {payload}")
         
         try :
-            response = requests.post("http://127.0.0.1:8000/data", json=payload)
+            response = requests.post("https://medpred-ai-api.onrender.com/data", json=payload)
+            
+            # Use localhost for debugging : http://127.0.0.1:8000/data
+            # Use Public server : https://medpred-ai-api.onrender.com/data
+            
+            # response = requests.post("http://127.0.0.1:8000/data", json=payload)
+            
             # print(f"DEBUG - status : {response.status_code}, response : {response.text}")
             if response.status_code == 200 :
                 print("Data Added!")
