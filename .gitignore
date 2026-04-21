@@ -4,3 +4,5 @@
 #files
 .vscode
 .venv
+*.pyc
+.idea
