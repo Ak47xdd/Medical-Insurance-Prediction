@@ -3,8 +3,11 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 
-
-df = pd.read_csv("insurance.csv")
+try:
+    df = pd.read_csv("insurance.csv")
+except FileNotFoundError:
+    df = pd.read_csv("API/insurance.csv")
+    
 
 df_1 = df.drop(columns= 'sex')
 df_1 = df.drop(columns= 'region')
