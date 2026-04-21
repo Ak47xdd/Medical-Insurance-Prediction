@@ -8,13 +8,22 @@ import Insurance as ins
 
 app = FastAPI(title="Database Management API - MedPred.AI")
 
+# user data
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CSV_PATH = os.path.join(BASE_DIR, "new_data.csv")
+
+# chat data
+BASE_DIR_CHAT = os.path.dirname(os.path.abspath(__file__))
+CSV_PATH_CHAT = os.path.join(BASE_DIR_CHAT, "new_data.csv")
 
 class PatientEntry(BaseModel):
     age: int
     bmi: float
     charges: float
+    
+class ChatHistory(BaseModel):
+    prompt: str
+    answer: str
 
 @app.post("/predict/")
 async def predict(age: int, bmi: float) -> float:
@@ -60,6 +69,10 @@ def get_val(entry: PatientEntry) -> dict:
         return {"status": "success", "message": "Entry Added."}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+@app.post("/chats")
+def get_chats(entry: ChatHistory) -> dict:
+    ...
 
 @app.get("/entries")
 def entries() -> dict:
