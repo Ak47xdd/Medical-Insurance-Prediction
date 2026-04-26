@@ -3,11 +3,18 @@ from rich.console import Console
 from dataclasses import dataclass, field
 from typing import Any, Callable, Annotated, get_origin, get_args, Union, Final
 import pandas as pd
+from dotenv import load_dotenv, find_dotenv
 import requests
+import os
 import inspect
 import json
 import datetime
 import getpass
+
+load_dotenv()
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+if not GROQ_API_KEY:
+    raise ValueError("GROQ_API_KEY not set")
 
 @dataclass
 class Tools:
@@ -126,9 +133,9 @@ class Tools:
 @dataclass
 class Agent:
     system_prompt: str = "You are an AI chatbot assistant for a software called MedPred.AI developed by Akshay Babu, you are an assistant/helper to the users that may use the App or the API to calculate their medical insurance expenses, predicted by MedPred.AI using their Age, BMI. use these values to give them advice on their health and how they must move on with their life. keep the responses short and consise"
-    model: str = "qwen2.5-coder-3b-instruct"
-    base_url: str = "http://127.0.0.1:1234/v1"
-    api_key: str = field(default="NO_API_KEY", repr=False)
+    model: str = "openai/gpt-oss-120b"
+    base_url: str = "https://api.groq.com/openai/v1"
+    api_key: str = GROQ_API_KEY
     tools: Tools = field(default_factory=Tools)
     contexts: dict[str, Callable[[], str]] = field(default_factory=dict)
     messages: list[dict[str, Any]] = field(default_factory=list)
@@ -218,7 +225,9 @@ class Agent:
 
 def main() -> None:
     agent = Agent(
-        model="qwen2.5-coder-3b-instruct",
+        model="openai/gpt-oss-120b",
+        base_url="https://api.groq.com/openai/v1",
+        api_key=GROQ_API_KEY,
         system_prompt= "You are an AI chatbot assistant for a software called MedPred.AI developed by Akshay Babu, you are an assistant/helper to the users that may use the App or the API to calculate their medical insurance expenses, predicted by MedPred.AI using their Age, BMI. use these values to give them advice on their health and how they must move on with their life. keep the responses short and consise"    
     )
 
